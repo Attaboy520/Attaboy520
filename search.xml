@@ -144,30 +144,6 @@
       </tags>
   </entry>
   <entry>
-    <title>USTRUCT宏</title>
-    <url>/2021/08/19/ue4/%E6%8F%92%E4%BB%B6/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%8F-USTRUCT/</url>
-    <content><![CDATA[<span id="more"></span>
-
-<p>USTRUCT宏收缩与指定某些设置和属性</p>
-<p>注意，只有USTRUCT的UPROPERTY变量才被考虑到复制</p>
-<p>只有SPROPERTY宏标记的USTRUCT才能被计入垃圾回收</p>
-<p>当在虚幻引擎中声明一个USTRUCT时，可以添加一个属于虚幻引擎的struct trait系统的NetSerialize方法，如果定义了这个方法，在属性复制和RPC之间，引擎会在struct序列化和反序列化的时候调用它</p>
-<p>有效关键字<br>Atomic<br>表示这个结构应该总是作为一个单元序列化</p>
-<p>BlueprintType<br>将此结构公开为蓝图中变量的类型</p>
-<p>Immutable<br>在Object.h中只是合法的，正在被弃用</p>
-<p>NoExport<br>没有自动生成的代码将被创建为这个类，头只是用来提供解析元数据的</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">USTRUCT(BlueprintType)</span><br><span class="line">struct FPerson</span><br><span class="line">&#123;</span><br><span class="line">    GENERATED_USTRUCT_BODY()</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        int32 P_ID;</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        FName P_Name;</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        FString P_Direction;</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        AActor* SelfPointer;</span><br><span class="line"></span><br><span class="line">    void SetP_Name(FName In_Name) &#123; P_Name = In_Name; &#125;</span><br><span class="line"></span><br><span class="line">    AActor* GetSelfPointer() &#123; return SelfPointer; &#125;</span><br><span class="line"></span><br><span class="line">    FPerson()</span><br><span class="line">    &#123;</span><br><span class="line">        P_ID = 0;</span><br><span class="line">        P_Name = TEXT(&quot;snowing&quot;);</span><br><span class="line">        P_Direction = TEXT(&quot;this is a dog&quot;);</span><br><span class="line">        SelfPointer = nullptr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/08/19/ue4/%E6%8F%92%E4%BB%B6/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%8F-USTRUCT/1627347998422-77p.png" alt="1627347998422-77p.png"></p>
-]]></content>
-      <categories>
-        <category>UE4</category>
-        <category>常见宏</category>
-      </categories>
-      <tags>
-        <tag>UE4常见的宏</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>加载本地文件</title>
     <url>/2021/08/19/ue4/%E6%8F%92%E4%BB%B6/%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E8%BD%ACTexture2D/</url>
     <content><![CDATA[<span id="more"></span>
@@ -193,6 +169,30 @@
       </categories>
       <tags>
         <tag>UE4插件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>USTRUCT宏</title>
+    <url>/2021/08/19/ue4/%E6%8F%92%E4%BB%B6/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%8F-USTRUCT/</url>
+    <content><![CDATA[<span id="more"></span>
+
+<p>USTRUCT宏收缩与指定某些设置和属性</p>
+<p>注意，只有USTRUCT的UPROPERTY变量才被考虑到复制</p>
+<p>只有SPROPERTY宏标记的USTRUCT才能被计入垃圾回收</p>
+<p>当在虚幻引擎中声明一个USTRUCT时，可以添加一个属于虚幻引擎的struct trait系统的NetSerialize方法，如果定义了这个方法，在属性复制和RPC之间，引擎会在struct序列化和反序列化的时候调用它</p>
+<p>有效关键字<br>Atomic<br>表示这个结构应该总是作为一个单元序列化</p>
+<p>BlueprintType<br>将此结构公开为蓝图中变量的类型</p>
+<p>Immutable<br>在Object.h中只是合法的，正在被弃用</p>
+<p>NoExport<br>没有自动生成的代码将被创建为这个类，头只是用来提供解析元数据的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">USTRUCT(BlueprintType)</span><br><span class="line">struct FPerson</span><br><span class="line">&#123;</span><br><span class="line">    GENERATED_USTRUCT_BODY()</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        int32 P_ID;</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        FName P_Name;</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        FString P_Direction;</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        AActor* SelfPointer;</span><br><span class="line"></span><br><span class="line">    void SetP_Name(FName In_Name) &#123; P_Name = In_Name; &#125;</span><br><span class="line"></span><br><span class="line">    AActor* GetSelfPointer() &#123; return SelfPointer; &#125;</span><br><span class="line"></span><br><span class="line">    FPerson()</span><br><span class="line">    &#123;</span><br><span class="line">        P_ID = 0;</span><br><span class="line">        P_Name = TEXT(&quot;snowing&quot;);</span><br><span class="line">        P_Direction = TEXT(&quot;this is a dog&quot;);</span><br><span class="line">        SelfPointer = nullptr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/08/19/ue4/%E6%8F%92%E4%BB%B6/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%8F-USTRUCT/1627347998422-77p.png" alt="1627347998422-77p.png"></p>
+]]></content>
+      <categories>
+        <category>UE4</category>
+        <category>常见宏</category>
+      </categories>
+      <tags>
+        <tag>UE4常见的宏</tag>
       </tags>
   </entry>
 </search>

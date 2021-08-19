@@ -479,89 +479,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://attaboy520.github.io/2021/08/19/ue4/%E6%8F%92%E4%BB%B6/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%8F-USTRUCT/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/39260501">
-      <meta itemprop="name" content="Attaboy">
-      <meta itemprop="description" content="我的小站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/19/ue4/%E6%8F%92%E4%BB%B6/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%8F-USTRUCT/" class="post-title-link" itemprop="url">USTRUCT宏</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-08-19 08:58:19 / 修改时间：12:05:36" itemprop="dateCreated datePublished" datetime="2021-08-19T08:58:19+08:00">2021-08-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UE4/" itemprop="url" rel="index"><span itemprop="name">UE4</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UE4/%E5%B8%B8%E8%A7%81%E5%AE%8F/" itemprop="url" rel="index"><span itemprop="name">常见宏</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<p>USTRUCT宏收缩与指定某些设置和属性</p>
-<p>注意，只有USTRUCT的UPROPERTY变量才被考虑到复制</p>
-<p>只有SPROPERTY宏标记的USTRUCT才能被计入垃圾回收</p>
-<p>当在虚幻引擎中声明一个USTRUCT时，可以添加一个属于虚幻引擎的struct trait系统的NetSerialize方法，如果定义了这个方法，在属性复制和RPC之间，引擎会在struct序列化和反序列化的时候调用它</p>
-<p>有效关键字<br>Atomic<br>表示这个结构应该总是作为一个单元序列化</p>
-<p>BlueprintType<br>将此结构公开为蓝图中变量的类型</p>
-<p>Immutable<br>在Object.h中只是合法的，正在被弃用</p>
-<p>NoExport<br>没有自动生成的代码将被创建为这个类，头只是用来提供解析元数据的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">USTRUCT(BlueprintType)</span><br><span class="line">struct FPerson</span><br><span class="line">&#123;</span><br><span class="line">    GENERATED_USTRUCT_BODY()</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        int32 P_ID;</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        FName P_Name;</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        FString P_Direction;</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        AActor* SelfPointer;</span><br><span class="line"></span><br><span class="line">    void SetP_Name(FName In_Name) &#123; P_Name = In_Name; &#125;</span><br><span class="line"></span><br><span class="line">    AActor* GetSelfPointer() &#123; return SelfPointer; &#125;</span><br><span class="line"></span><br><span class="line">    FPerson()</span><br><span class="line">    &#123;</span><br><span class="line">        P_ID = 0;</span><br><span class="line">        P_Name = TEXT(&quot;snowing&quot;);</span><br><span class="line">        P_Direction = TEXT(&quot;this is a dog&quot;);</span><br><span class="line">        SelfPointer = nullptr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><img src="/2021/08/19/ue4/%E6%8F%92%E4%BB%B6/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%8F-USTRUCT/1627347998422-77p.png" alt="1627347998422-77p.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://attaboy520.github.io/2021/08/19/ue4/%E6%8F%92%E4%BB%B6/%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E8%BD%ACTexture2D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -630,6 +547,89 @@
 <p>需要在.Build.cs中添加ImageWrapper模块</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">UTexturesOperation::LoadImageFromUrl</span><span class="params">(<span class="keyword">const</span> FString&amp; ImageUrl, UTexture2D*&amp; InTexture)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    TArray&lt;uint8&gt; ImageResultData;</span><br><span class="line">    FFileHelper::LoadFileToArray(ImageResultData, *ImageUrl);</span><br><span class="line">    IImageWrapperModule&amp; ImageWrapperModule = FModuleManager::LoadModuleChecked&lt;IImageWrapperModule&gt;(<span class="string">&quot;ImageWrapper&quot;</span>);</span><br><span class="line">    TSharedPtr&lt;IImageWrapper&gt; ImageWrapperPtr = ImageWrapperModule.CreateImageWrapper(GetImageFormatFromExtension(ImageUrl));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (ImageWrapperPtr.IsValid() &amp;&amp; ImageWrapperPtr-&gt;SetCompressed(ImageResultData.GetData(), ImageResultData.Num()))</span><br><span class="line">    &#123;</span><br><span class="line">        TArray&lt;uint8&gt; OutRawData;</span><br><span class="line">        <span class="comment">//8位图片</span></span><br><span class="line">        <span class="keyword">if</span> (ImageWrapperPtr-&gt;GetRaw(ERGBFormat::BGRA, <span class="number">8</span>, OutRawData))</span><br><span class="line">        &#123;</span><br><span class="line">            InTexture = UTexture2D::CreateTransient(ImageWrapperPtr-&gt;GetWidth(), ImageWrapperPtr-&gt;GetHeight());</span><br><span class="line">            <span class="keyword">if</span> (InTexture)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">void</span>* TextureData = InTexture-&gt;PlatformData-&gt;Mips[<span class="number">0</span>].BulkData.Lock(LOCK_READ_WRITE);</span><br><span class="line">                FMemory::Memcpy(TextureData, OutRawData.GetData(), OutRawData.Num());</span><br><span class="line">                InTexture-&gt;PlatformData-&gt;Mips[<span class="number">0</span>].BulkData.Unlock();</span><br><span class="line">                InTexture-&gt;UpdateResource();</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://attaboy520.github.io/2021/08/19/ue4/%E6%8F%92%E4%BB%B6/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%8F-USTRUCT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/39260501">
+      <meta itemprop="name" content="Attaboy">
+      <meta itemprop="description" content="我的小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/19/ue4/%E6%8F%92%E4%BB%B6/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%8F-USTRUCT/" class="post-title-link" itemprop="url">USTRUCT宏</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-19 08:58:19 / 修改时间：12:05:36" itemprop="dateCreated datePublished" datetime="2021-08-19T08:58:19+08:00">2021-08-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UE4/" itemprop="url" rel="index"><span itemprop="name">UE4</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UE4/%E5%B8%B8%E8%A7%81%E5%AE%8F/" itemprop="url" rel="index"><span itemprop="name">常见宏</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<p>USTRUCT宏收缩与指定某些设置和属性</p>
+<p>注意，只有USTRUCT的UPROPERTY变量才被考虑到复制</p>
+<p>只有SPROPERTY宏标记的USTRUCT才能被计入垃圾回收</p>
+<p>当在虚幻引擎中声明一个USTRUCT时，可以添加一个属于虚幻引擎的struct trait系统的NetSerialize方法，如果定义了这个方法，在属性复制和RPC之间，引擎会在struct序列化和反序列化的时候调用它</p>
+<p>有效关键字<br>Atomic<br>表示这个结构应该总是作为一个单元序列化</p>
+<p>BlueprintType<br>将此结构公开为蓝图中变量的类型</p>
+<p>Immutable<br>在Object.h中只是合法的，正在被弃用</p>
+<p>NoExport<br>没有自动生成的代码将被创建为这个类，头只是用来提供解析元数据的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">USTRUCT(BlueprintType)</span><br><span class="line">struct FPerson</span><br><span class="line">&#123;</span><br><span class="line">    GENERATED_USTRUCT_BODY()</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        int32 P_ID;</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        FName P_Name;</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        FString P_Direction;</span><br><span class="line"></span><br><span class="line">    UPROPERTY()</span><br><span class="line">        AActor* SelfPointer;</span><br><span class="line"></span><br><span class="line">    void SetP_Name(FName In_Name) &#123; P_Name = In_Name; &#125;</span><br><span class="line"></span><br><span class="line">    AActor* GetSelfPointer() &#123; return SelfPointer; &#125;</span><br><span class="line"></span><br><span class="line">    FPerson()</span><br><span class="line">    &#123;</span><br><span class="line">        P_ID = 0;</span><br><span class="line">        P_Name = TEXT(&quot;snowing&quot;);</span><br><span class="line">        P_Direction = TEXT(&quot;this is a dog&quot;);</span><br><span class="line">        SelfPointer = nullptr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/08/19/ue4/%E6%8F%92%E4%BB%B6/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%8F-USTRUCT/1627347998422-77p.png" alt="1627347998422-77p.png"></p>
 
       
     </div>
